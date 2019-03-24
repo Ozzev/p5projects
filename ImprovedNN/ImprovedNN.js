@@ -1,3 +1,30 @@
+class ActivationFunction {
+  constructor(func, dfunc) {
+    this.func = func;
+    this.dfunc = dfunc;
+  }
+}
+
+let sigmoid = new ActivationFunction(
+  x => 1 / (1 + Math.exp(-x)),
+  y => y * (1 - y)
+);
+
+let tanh = new ActivationFunction(
+  x => Math.tanh(x),
+  y => 1 - (y * y)
+);
+
+function mutate(x) {
+  if (random(1) < 0.1) {
+    let offset = randomGaussian() * 0.5;
+    let newx = x + offset;
+    return newx;
+  } else {
+    return x;
+  }
+}
+
 class ImprovedNN
 {
   constructor(in_nodes, out_nodes)
@@ -84,7 +111,7 @@ class ImprovedNN
     this.activation_function = func;
   }
 
-  mutate(func) {
+  mutate(func = mutate) {
     this.weights_ih.map(func);
 
     for(let i = 0; i < this.weights_hh.length; i++)
