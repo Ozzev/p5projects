@@ -20,23 +20,25 @@ class Dino
 
   update()
   {
-    if(this.isJumping)
-    {
-      this.posy += this.acc;
-      this.acc += this.gravity;
-    }
+    this.posy += this.acc;
+    this.acc += this.gravity;
+
     if(this.posy > this.baseY)
     {
       this.isJumping = false;
       this.posy = this.baseY;
+      this.acc = 0;
     }
   }
 
-  jump()
+  increaseJ()
   {
-    if(!this.isJumping)
+    if(!this.isJumping && this.acc > -10)
     {
-      this.acc = -10;
+      this.acc -= 3;
+    }
+    if(this.acc < -10)
+    {
       this.isJumping = true;
     }
   }
