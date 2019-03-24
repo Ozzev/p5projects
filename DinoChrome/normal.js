@@ -15,7 +15,7 @@ function draw()
   d.update();
   d.show();
   Cacty.show();
-	Cacty.update();
+  Cacty.update();
 }
 
 function mousePressed()
