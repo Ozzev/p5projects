@@ -14,7 +14,7 @@ class Cactus{
   	}
 	
 	collisionDetect(){
-		if ((this.posx-this.width/2 <= Dino.posx+Dino.width/2) && (this.posy-this.height/2 <= Dino.posx+Dino.heigth/2)) this.collision=true;
+		if ((this.posx <= Dino.posx+Dino.width) && (this.posy <= Dino.posx+Dino.heigth)) this.collision=true;
 	}
 	
 	update(){
