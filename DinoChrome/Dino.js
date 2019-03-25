@@ -1,16 +1,42 @@
 class Dino
 {
-  constructor(posx, posy, dimx, dimy, gravity)
+  constructor(brain)
   {
-    this.posx = posx;
-    this.posy = posy;
-    this.dimx = dimx;
-    this.dimy = dimy;
+    this.posx = 100;
+    this.posy = 200;
+    this.dimx = 25;
+    this.dimy = 50;
+    this.fitness = 0;
 
-    this.baseY = posy;
+    this.baseY = this.posy;
     this.acc = 0;
-    this.gravity = gravity;
+    this.gravity = 0.75;
     this.inJumping = false;
+
+    this.die = 0;
+
+    if(brain instanceof ImprovedNN)
+    {
+      this.brain = brain;
+      this.brain.mutate();
+    }
+    else
+    {
+      this.brain = new ImprovedNN(4, 2);
+      this.brain.setHNodes(0, 8);
+      this.brain.create();
+    }
+  }
+
+  think(input)
+  {
+    let output = this.brain.predict(input);
+    return output;
+  }
+
+  copy()
+  {
+    return new Dino(this.brain);
   }
 
   show()
@@ -20,6 +46,7 @@ class Dino
 
   update()
   {
+    this.fitness++;
     this.posy += this.acc;
     this.acc += this.gravity;
 
@@ -31,14 +58,20 @@ class Dino
     }
   }
 
-  increaseJ()
+  smallJump()
   {
-    if(!this.isJumping && this.acc > -10)
+    if(!this.isJumping)
     {
-      this.acc -= 3;
+      this.acc -= 10;
+      this.isJumping = true;
     }
-    if(this.acc < -10)
+  }
+
+  bigJump()
+  {
+    if(!this.isJumping)
     {
+      this.acc -= 14;
       this.isJumping = true;
     }
   }

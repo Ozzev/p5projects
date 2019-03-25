@@ -1,23 +1,55 @@
 class Cactus{
-	
-	constructor(){
-		this.type = random(3);
-		this.height = (this.type+5)/3*20;
-		this.width = ((this.type+this.type/2)/(this.type/2+1)+1)*20;
-		this.posx = 600;
-		this.posy = 200-this.height;
-		this.collision=false;
+
+	constructor(speed){
+
+		this.type = Math.floor(Math.random() * 3);
+
+		switch(this.type)
+		{
+			case 0:
+				this.dimy = 25;
+				this.dimx = 25;
+				break;
+			case 1:
+				this.dimy = 50;
+				this.dimx = 25;
+				break;
+			case 2:
+				this.dimy = 25;
+				this.dimx = 75;
+				break;
+		}
+
+		this.posx = width;
+		this.posy = height - 250 - this.dimy;
+
+		this.speed = speed;
 	}
-	
-	show(){
-    		rect(this.posx, this.posy, this.height, this.width);
-  	}
-	
-	collisionDetect(){
-		if ((this.posx <= Dino.posx+Dino.width) && (this.posy <= Dino.posx+Dino.heigth)) this.collision=true;
-	}
-	
-	update(){
-		this.posx-=Dino.acc;
+
+	intersect(posx, posy, dimx, dimy)
+  {
+    if(this.posx < posx + dimx && this.posx + this.dimx > posx
+    && this.posy < posy + dimy && this.posy + this.dimy > posy)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+	show()
+	{
+    rect(this.posx, this.posy, this.dimx, this.dimy);
+  }
+
+	/*collisionDetect(){
+		if ((this.posx <= ) && (this.posy <= )) this.collision=true;
+	}*/
+
+	update()
+	{
+		this.posx -= this.speed;
 	}
 }
