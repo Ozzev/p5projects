@@ -10,6 +10,7 @@ let divAllBestScore;
 let thisBestScore;
 let allBestScore;
 
+const CACTUS_SPEED = 8;
 const MAX_WAIT = 200;
 const MIN_WAIT = 100;
 const POPULATION = 100;
@@ -31,7 +32,7 @@ function setup()
   allTimeBest = d[0];
   allBestScore = d[0].fitness;
 
-  Cacty[0] = new Cactus(4);
+  Cacty[0] = new Cactus(CACTUS_SPEED);
 
   wait = Math.floor(Math.random() * MIN_WAIT);
   wait = constrain(wait, MIN_WAIT, MAX_WAIT);
@@ -43,7 +44,7 @@ function restart()
 {
   loops = 0;
   Cacty = [];
-  Cacty[0] = new Cactus(4);
+  Cacty[0] = new Cactus(CACTUS_SPEED);
 
   wait = Math.floor(Math.random() * MIN_WAIT);
   wait = constrain(wait, MIN_WAIT, MAX_WAIT);
@@ -72,7 +73,7 @@ function draw()
   {
     if(loops == wait)
     {
-      Cacty.push(new Cactus(4));
+      Cacty.push(new Cactus(CACTUS_SPEED));
       wait = Math.floor(Math.random() * MAX_WAIT);
       wait = constrain(wait, MIN_WAIT, MAX_WAIT);
       loops = 0;
@@ -104,8 +105,7 @@ function draw()
         else
         {
           let input = [];
-          input.push(d[i].posx);
-          input.push(Cacty[j].posx);
+          input.push(Cacty[j].posx - d[i].posx);
           input.push(Cacty[j].dimx);
           input.push(Cacty[j].dimy);
 

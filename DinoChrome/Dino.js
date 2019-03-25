@@ -22,7 +22,7 @@ class Dino
     }
     else
     {
-      this.brain = new ImprovedNN(4, 2);
+      this.brain = new ImprovedNN(3, 2);
       this.brain.setHNodes(0, 8);
       this.brain.create();
     }
