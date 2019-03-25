@@ -39,6 +39,9 @@ class ImprovedNN
     this.hiddens = [];
     this.weights_hh = [];
     this.bias_h = [];
+
+    this.setActivationFunction();
+    this.setLearningRate();
   }
 
   setHNodes(layer, nodes)
@@ -61,7 +64,7 @@ class ImprovedNN
     }
 
     // WEIGHTS OUT
-    this.weights_ho = new Matrix(this.hiddens[this.hiddens.length - 1], this.input_nodes);
+    this.weights_ho = new Matrix(this.output_nodes, this.hiddens[this.hiddens.length - 1]);
     this.weights_ho.randomize();
 
 
